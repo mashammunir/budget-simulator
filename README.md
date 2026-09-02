@@ -1,4 +1,4 @@
- Student Budget Simulator
+## Student Budget Simulator
 
 A simple, interactive budget simulator designed to help students understand their monthly spending and make smarter budgeting decisions.
 
