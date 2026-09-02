@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOOJH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Landing -->
+    <div class="screen bg-swirl" id="landingScreen">
+        <div class="sparkle sparkle-1">&#10022;</div>
+        <div class="sparkle sparkle-2">&#10022;</div>
+        <div class="sparkle sparkle-3">&#10022;</div>
+        <div class="card landing-card">
+            <span class="badge">2 min gut check</span>
+            <h1>Before you say <span class="highlight">"YOLO,"</span><br>check your budget.</h1>
+            <p>Two minutes to see how broke you actually are.</p>
+            <button id="startBtn">Let's go</button>
+            <p class="small-text">Brace yourself.</p>
+        </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="screen hidden bg-stripes-v" id="q1Screen">
+        <div class="card question-card">
+            <p class="progress">01 / 07</p>
+            <h2>Where do you live during university?</h2>
+            <div class="options">
+                <button class="option-card" data-value="family">With family</button>
+                <button class="option-card" data-value="hostel">University hostel</button>
+                <button class="option-card" data-value="rented">Rented or shared</button>
+            </div>
+            <p class="link-text edit-back-link hidden" data-return="q1">Back to edit menu</p>
+        </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="screen hidden bg-sunburst" id="q2Screen">
+        <div class="card question-card">
+            <p class="progress">02 / 07</p>
+            <h2>Where does your money come from?</h2>
+            <div class="options">
+                <button class="option-card" data-value="parents">Parents</button>
+                <button class="option-card" data-value="job">Job</button>
+                <button class="option-card" data-value="freelancing">Freelancing</button>
+                <button class="option-card" data-value="scholarship">Scholarship</button>
+                <button class="option-card" data-value="mix">A bit of everything</button>
+            </div>
+            <p class="link-text edit-back-link hidden" data-return="q2">Back to edit menu</p>
+        </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="screen hidden bg-stars" id="q3Screen">
+        <div class="card question-card">
+            <p class="progress">03 / 07</p>
+            <h2>How much money do you have right now?</h2>
+            <input type="number" id="currentMoneyInput" placeholder="Rs.">
+            <button class="continue-btn" id="q3ContinueBtn">Continue</button>
+            <p class="link-text edit-back-link hidden" data-return="q3">Back to edit menu</p>
+        </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="screen hidden bg-checker" id="q4Screen">
+        <div class="card question-card">
+            <p class="progress">04 / 07</p>
+            <h2>When will you get money again?</h2>
+            <input type="date" id="nextIncomeDateInput">
+            <button class="continue-btn" id="q4ContinueBtn">Continue</button>
+            <p class="link-text" id="dontKnowDateBtn">I don't know my next income date</p>
+
+            <div class="hidden" id="fallbackDaysBox">
+                <p class="sub-label">How many days should we plan for?</p>
+                <input type="number" id="fallbackDaysInput" placeholder="e.g. 14">
+                <button class="continue-btn" id="fallbackContinueBtn">Continue</button>
+            </div>
+            <p class="link-text edit-back-link hidden" data-return="q4">Back to edit menu</p>
+        </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="screen hidden bg-stripes-d" id="q5Screen">
+        <div class="card question-card">
+            <p class="progress">05 / 07</p>
+            <h2>How much will you receive?</h2>
+            <input type="number" id="nextIncomeAmountInput" placeholder="Rs.">
+            <button class="continue-btn" id="q5ContinueBtn">Continue</button>
+            <p class="link-text edit-back-link hidden" data-return="q5">Back to edit menu</p>
+        </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="screen hidden bg-waves" id="q6Screen">
+        <div class="card question-card">
+
+            <div id="q6QuickView">
+                <p class="progress">06 / 07</p>
+                <h2>What are your planned expenses until then?</h2>
+                <p class="sub-label">Total of everything. Food, transport, hostel, whatever.</p>
+                <input type="number" id="expensesInput" placeholder="Rs.">
+                <button class="continue-btn" id="q6ContinueBtn">Continue</button>
+                <p class="link-text" id="breakDownBtn">Or, break it down instead</p>
+                <p class="link-text edit-back-link hidden" data-return="q6">Back to edit menu</p>
+            </div>
+
+            <div class="hidden" id="q6DetailedHostel">
+                <p class="progress">06 / 07</p>
+                <h2>Let's break it down</h2>
+                <p class="sub-label">Hostel life expenses. Leave anything blank if it's not paid by you. For the bigger, occasional ones, tell us how often they come around and whether one's due before your next income.</p>
+
+                <div class="bill-item">
+                    <input type="number" id="hostelFeeInput" placeholder="Hostel fee (Rs.)">
+                    <div class="bill-item-controls">
+                        <select id="hostelFeeFrequency" class="select-input bill-frequency-select">
+                            <option value="onetime">One-time</option>
+                            <option value="monthly">Every month</option>
+                            <option value="semester" selected>Every 6 months</option>
+                        </select>
+                        <label class="bill-duenow-label">
+                            <input type="checkbox" id="hostelFeeDueNow">
+                            Due before my next income
+                        </label>
+                    </div>
+                </div>
+
+                <input type="number" id="messFeeInput" placeholder="Mess fee (Rs.)">
+                <input type="number" id="hostelFoodInput" placeholder="Snacks / eating out (Rs.)">
+                <input type="number" id="hostelTransportInput" placeholder="Local transport (Rs.)">
+
+                <div class="bill-item">
+                    <input type="number" id="hostelHomeTripInput" placeholder="Trips back home, bus or train (Rs.)">
+                    <div class="bill-item-controls">
+                        <select id="hostelHomeTripFrequency" class="select-input bill-frequency-select">
+                            <option value="onetime" selected>One-time</option>
+                            <option value="monthly">Every month</option>
+                            <option value="semester">Every 6 months</option>
+                        </select>
+                        <label class="bill-duenow-label">
+                            <input type="checkbox" id="hostelHomeTripDueNow">
+                            Due before my next income
+                        </label>
+                    </div>
+                </div>
+
+                <input type="number" id="hostelStationeryInput" placeholder="Stationery / printing (Rs.)">
+
+                <div class="bill-item">
+                    <input type="number" id="hostelOtherInput" placeholder="Everything else (Rs.)">
+                    <div class="bill-item-controls">
+                        <select id="hostelOtherFrequency" class="select-input bill-frequency-select">
+                            <option value="onetime" selected>One-time</option>
+                            <option value="monthly">Every month</option>
+                            <option value="semester">Every 6 months</option>
+                        </select>
+                        <label class="bill-duenow-label">
+                            <input type="checkbox" id="hostelOtherDueNow">
+                            Due before my next income
+                        </label>
+                    </div>
+                </div>
+
+                <button class="continue-btn" id="q6HostelContinueBtn">Add it up</button>
+                <p class="link-text" id="backToQuickFromHostel">Back to quick total</p>
+                <p class="link-text edit-back-link hidden" data-return="q6">Back to edit menu</p>
+            </div>
+
+            <div class="hidden" id="q6DetailedDay">
+                <p class="progress">06 / 07</p>
+                <h2>Let's break it down</h2>
+                <p class="sub-label">Your commute and daily costs.</p>
+
+                <p class="sub-label" style="margin-top: 0;">How do you get to university?</p>
+                <select id="transportModeSelect" class="select-input">
+                    <option value="bike">Bike or motorcycle</option>
+                    <option value="car">Car</option>
+                    <option value="rickshaw">Rickshaw</option>
+                    <option value="orange">Orange Line / Metro</option>
+                    <option value="bus">Bus</option>
+                    <option value="walk">Walk (no cost)</option>
+                </select>
+
+                <input type="number" id="transportFareInput" placeholder="Fare or fuel cost per day (Rs.)">
+                <input type="number" id="transportDaysInput" placeholder="University days per week">
+
+                <input type="number" id="dayFoodInput" placeholder="Food per day (Rs.)">
+                <input type="number" id="dayStationeryInput" placeholder="Stationery / printing (Rs.)">
+
+                <div class="bill-item">
+                    <input type="number" id="dayOtherInput" placeholder="Everything else (Rs.)">
+                    <div class="bill-item-controls">
+                        <select id="dayOtherFrequency" class="select-input bill-frequency-select">
+                            <option value="onetime" selected>One-time</option>
+                            <option value="monthly">Every month</option>
+                            <option value="semester">Every 6 months</option>
+                        </select>
+                        <label class="bill-duenow-label">
+                            <input type="checkbox" id="dayOtherDueNow">
+                            Due before my next income
+                        </label>
+                    </div>
+                </div>
+
+                <button class="continue-btn" id="q6DayContinueBtn">Add it up</button>
+                <p class="link-text" id="backToQuickFromDay">Back to quick total</p>
+                <p class="link-text edit-back-link hidden" data-return="q6">Back to edit menu</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="screen hidden bg-swirl" id="q7Screen">
+        <div class="card question-card">
+            <p class="progress">07 / 07</p>
+            <h2>Got something you're saving for?</h2>
+            <input type="text" id="goalNameInput" placeholder="e.g. New phone">
+            <input type="number" id="goalTargetInput" placeholder="Target amount (Rs.)">
+            <input type="number" id="goalSavedInput" placeholder="Already saved (Rs.)">
+            <input type="number" id="goalContributionInput" placeholder="Monthly contribution (Rs.)">
+            <button class="continue-btn" id="q7ContinueBtn">Continue</button>
+            <p class="link-text" id="skipGoalBtn">Skip. No goal right now</p>
+            <p class="link-text edit-back-link hidden" data-return="q7">Back to edit menu</p>
+        </div>
+    </div>
+
+    <!-- Snapshot -->
+    <div class="screen hidden bg-stripes-v" id="snapshotScreen">
+        <div class="card snapshot-card">
+            <p class="sub-label">Your money snapshot is ready.</p>
+            <h2 id="snapshotCurrentMoney">Rs. 0</h2>
+            <p id="snapshotDaysLeft" class="days-left"></p>
+            <p id="snapshotNextIncome" class="sub-label"></p>
+            <button class="continue-btn" id="snapshotContinueBtn">Show me my budget</button>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="screen hidden bg-dashboard" id="dashboardScreen">
+        <div class="dashboard-wrap">
+
+            <div class="dash-header">
+                <div class="dash-header-text">
+                    <p class="dash-greeting">Hey there</p>
+                    <h2 class="dash-title">Here's your <span class="highlight">money vibe</span></h2>
+                </div>
+                <div class="mascot-wrap-inline">
+                    <div class="mascot-bubble" id="mascotMessage">Loading your vibe...</div>
+                    <svg viewBox="0 0 120 110" class="mascot-svg-small">
+                        <path d="M20 30 L35 5 L45 32 Z" fill="#F4D35E" stroke="#2A2438" stroke-width="3" stroke-linejoin="round"/>
+                        <path d="M100 30 L85 5 L75 32 Z" fill="#F4D35E" stroke="#2A2438" stroke-width="3" stroke-linejoin="round"/>
+                        <ellipse cx="60" cy="60" rx="48" ry="42" fill="#F4D35E" stroke="#2A2438" stroke-width="3"/>
+                        <circle cx="42" cy="55" r="5" fill="#2A2438"/>
+                        <circle cx="78" cy="55" r="5" fill="#2A2438"/>
+                        <ellipse cx="30" cy="68" rx="7" ry="4" fill="#F0A8C4" opacity="0.7"/>
+                        <ellipse cx="90" cy="68" rx="7" ry="4" fill="#F0A8C4" opacity="0.7"/>
+                        <path d="M50 75 Q60 82 70 75" stroke="#2A2438" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="migration-note hidden" id="migrationNote">
+                <p>Your expense list is from before bills got smarter. Head to Edit My Info to redo your expenses so due dates and paid status work properly.</p>
+                <button class="migration-dismiss" id="migrationDismissBtn">Got it</button>
+            </div>
+
+            <div class="income-confirm-card hidden" id="incomeConfirmCard">
+                <p class="income-confirm-text" id="incomeConfirmText">Did your income land yet?</p>
+                <div class="income-confirm-btns">
+                    <button class="income-confirm-btn income-confirm-yes" id="confirmExactBtn">Yes, exactly that</button>
+                    <button class="income-confirm-btn income-confirm-diff" id="confirmDifferentBtn">Yes, different amount</button>
+                    <button class="income-confirm-btn income-confirm-no" id="notYetBtn">Not yet</button>
+                </div>
+
+                <div class="income-inline-box hidden" id="differentAmountBox">
+                    <p class="sub-label" style="margin-top:0;">How much came in?</p>
+                    <input type="number" id="differentAmountInput" placeholder="Rs.">
+                    <button class="continue-btn" id="differentAmountConfirmBtn">Confirm</button>
+                </div>
+
+                <div class="income-inline-box hidden" id="followUpBox">
+                    <p class="sub-label" style="margin-top:0;">Nice. When's your next income after this, and how much?</p>
+                    <input type="date" id="followUpDateInput">
+                    <input type="number" id="followUpAmountInput" placeholder="Rs.">
+                    <button class="continue-btn" id="followUpSaveBtn">Save and continue</button>
+                </div>
+            </div>
+
+            <div class="hero-stat-card">
+                <p class="hero-stat-label">Left to spend</p>
+                <p class="hero-stat-value" id="statLeft">Rs. 0</p>
+                <p class="hero-stat-sub" id="statDaysLeft"></p>
+                <p class="hero-stat-shortfall hidden" id="heroShortfall"></p>
+            </div>
+
+            <div class="mini-stat-row">
+                <div class="mini-stat-card mini-pink">
+                    <p class="stat-label">Total balance</p>
+                    <p class="stat-value" id="statBalance">Rs. 0</p>
+                </div>
+                <div class="mini-stat-card mini-lavender">
+                    <p class="stat-label">Spent so far</p>
+                    <p class="stat-value" id="statSpent">Rs. 0</p>
+                </div>
+                <div class="mini-stat-card mini-orange">
+                    <p class="stat-label">Safe to spend/day</p>
+                    <p class="stat-value" id="statDaily">Rs. 0</p>
+                </div>
+            </div>
+
+            <div class="donut-card">
+                <p class="section-title-dark" style="text-align:left; margin-bottom: 14px;">Where it's going</p>
+                <div class="donut-body">
+                    <div class="donut-chart-wrap" id="donutChart"></div>
+                    <div class="donut-legend" id="donutLegend"></div>
+                </div>
+                <p class="donut-empty hidden" id="donutEmptyState">Break down your expenses in Edit My Info to see this.</p>
+            </div>
+
+            <div class="bills-card hidden" id="billsCard">
+                <p class="section-title-dark" style="text-align:left; margin-bottom: 6px;">Upcoming bills</p>
+                <p class="bills-subtext">Ticking "paid" is just for your own tracking. It won't change what's left to spend, that money was already set aside.</p>
+                <div id="billsList"></div>
+            </div>
+
+            <div class="insight-card hidden" id="insightCard">
+                <p class="section-title-dark" style="text-align:left; margin-bottom: 8px;">Where you could save</p>
+                <p class="insight-text" id="insightText"></p>
+            </div>
+
+            <div class="wins-section">
+                <p class="section-title-dark" style="text-align:left; margin-bottom: 14px;">Recent wins</p>
+                <div class="wins-strip" id="winsStrip"></div>
+            </div>
+
+            <p class="section-title-dark block-title">What do you want to check?</p>
+
+            <div class="block-grid">
+                <button class="feature-block block-pink" id="openAffordBtn">
+                    <svg class="block-icon-svg" viewBox="0 0 48 48" fill="none">
+                        <rect x="8" y="18" width="32" height="22" rx="4" fill="#2A2438"/>
+                        <rect x="12" y="10" width="24" height="10" rx="3" fill="#2A2438" opacity="0.85"/>
+                        <circle cx="24" cy="29" r="4" fill="#F0A8C4"/>
+                    </svg>
+                    <span class="block-label">Can I afford this?</span>
+                </button>
+
+                <button class="feature-block block-lavender" id="openTargetBtn">
+                    <svg class="block-icon-svg" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="16" stroke="#2A2438" stroke-width="3" fill="none"/>
+                        <circle cx="24" cy="24" r="9" stroke="#2A2438" stroke-width="3" fill="none"/>
+                        <circle cx="24" cy="24" r="3" fill="#2A2438"/>
+                    </svg>
+                    <span class="block-label">Set a daily target</span>
+                </button>
+
+                <button class="feature-block block-olive" id="openEditBtn">
+                    <svg class="block-icon-svg" viewBox="0 0 48 48" fill="none">
+                        <path d="M10 34 L30 14 L36 20 L16 40 L8 40 Z" fill="#2A2438"/>
+                        <rect x="27" y="11" width="8" height="8" transform="rotate(45 31 15)" fill="#2A2438"/>
+                    </svg>
+                    <span class="block-label">Edit my info</span>
+                </button>
+
+                <button class="feature-block block-orange" id="openGoalTeaserBtn">
+                    <svg class="block-icon-svg" viewBox="0 0 48 48" fill="none">
+                        <path d="M24 8 L28 20 L40 20 L30 27 L34 39 L24 31 L14 39 L18 27 L8 20 L20 20 Z" fill="#2A2438"/>
+                    </svg>
+                    <span class="block-label">Savings goal</span>
+                </button>
+
+                <button class="feature-block block-history" id="openHistoryBtn">
+                    <svg class="block-icon-svg" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="17" stroke="#2A2438" stroke-width="3" fill="none"/>
+                        <path d="M24 14 L24 24 L31 28" stroke="#2A2438" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="block-label">My history</span>
+                </button>
+            </div>
+
+            <button class="goal-teaser-card" id="goalTeaserBtn">
+                <div class="goal-teaser-top">
+                    <p class="goal-teaser-name" id="goalTeaserText">No goal set yet</p>
+                    <p class="goal-teaser-percent hidden" id="goalTeaserPercent"></p>
+                </div>
+                <div class="progress-bar-static">
+                    <div class="progress-fill-static" id="goalTeaserFill" style="width:0%"></div>
+                </div>
+                <p class="goal-teaser-empty hidden" id="goalTeaserEmpty">Tap to add one in Edit My Info.</p>
+            </button>
+
+            <button class="challenge-teaser-card" id="challengeTeaserBtn">
+                <div id="challengeTeaserContent"></div>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Can I Afford This -->
+    <div class="screen hidden bg-checker" id="affordScreen">
+        <div class="card afford-card">
+            <span class="badge">before you YOLO</span>
+            <h2>What are you thinking of buying?</h2>
+            <input type="text" id="affordItemInput" placeholder="e.g. University trip">
+            <input type="number" id="affordPriceInput" placeholder="Price (Rs.)">
+            <button class="continue-btn" id="affordCheckBtn">Check it</button>
+            <p class="link-text" id="affordBackBtn">Back to dashboard</p>
+
+            <div class="afford-result hidden" id="affordResult">
+                <div class="afford-verdict" id="affordVerdict"></div>
+                <p class="afford-line" id="affordLine1"></p>
+                <p class="afford-line" id="affordLine2"></p>
+                <p class="afford-line" id="affordLine3"></p>
+                <button class="continue-btn" id="affordDoneBtn">Back to dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Target -->
+    <div class="screen hidden bg-waves" id="targetScreen">
+        <div class="card afford-card">
+            <span class="badge">stay on track</span>
+            <h2>What's your daily spending target?</h2>
+            <input type="number" id="targetInput" placeholder="e.g. 300">
+            <button class="continue-btn" id="targetCheckBtn">Check it</button>
+            <p class="link-text" id="targetBackBtn">Back to dashboard</p>
+
+            <div class="afford-result hidden" id="targetResult">
+                <div class="afford-verdict" id="targetVerdict"></div>
+                <p class="afford-line" id="targetLine1"></p>
+                <p class="afford-line" id="targetLine2"></p>
+                <button class="continue-btn" id="targetDoneBtn">Back to dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Savings Goal detail -->
+    <div class="screen hidden bg-stars" id="goalScreen">
+        <div class="card afford-card">
+            <span class="badge">your goal</span>
+            <div id="goalScreenContent"></div>
+            <button class="continue-btn" id="goalBackBtn">Back to dashboard</button>
+        </div>
+    </div>
+
+    <!-- Challenges -->
+    <div class="screen hidden bg-sunburst" id="challengesScreen">
+        <div class="card afford-card challenges-card">
+            <span class="badge">challenges</span>
+            <div id="challengesScreenContent"></div>
+            <button class="continue-btn" id="challengesBackBtn">Back to dashboard</button>
+        </div>
+    </div>
+
+    <!-- History -->
+    <div class="screen hidden bg-stars" id="historyScreen">
+        <div class="card afford-card history-card-screen">
+            <span class="badge">your history</span>
+            <div id="historyScreenContent"></div>
+            <button class="continue-btn" id="historyBackBtn">Back to dashboard</button>
+        </div>
+    </div>
+
+    <!-- Edit info: choice -->
+    <div class="screen hidden bg-stripes-v" id="editChoiceScreen">
+        <div class="card afford-card">
+            <span class="badge">edit my info</span>
+            <h2>What do you want to do?</h2>
+            <button class="continue-btn" id="editOneBtn">Edit one answer</button>
+            <button class="continue-btn danger-btn" id="clearAllBtn">Clear everything and start over</button>
+            <p class="link-text" id="editChoiceBackBtn">Back to dashboard</p>
+        </div>
+    </div>
+
+    <!-- Edit info: pick which -->
+    <div class="screen hidden bg-stripes-v" id="editPickScreen">
+        <div class="card afford-card">
+            <span class="badge">edit my info</span>
+            <h2>Which one do you want to change?</h2>
+            <div class="options" id="editPickList"></div>
+            <p class="link-text" id="editPickBackBtn">Back</p>
+        </div>
+    </div>
+
+    <canvas id="confettiCanvas"></canvas>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
