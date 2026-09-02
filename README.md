@@ -2,7 +2,7 @@
 
 A simple, interactive budget simulator designed to help students understand their monthly spending and make smarter budgeting decisions.
 
- Features
+## Features
 
 *  Enter your monthly budget
 *  Track spending across different categories
@@ -11,18 +11,18 @@ A simple, interactive budget simulator designed to help students understand thei
 *  Responsive and user-friendly interface
 *  Fun, student-friendly design
 
- Built With
+## Built With
 
 * HTML
 * CSS
 * JavaScript
 * Firebase
 
- Purpose
+## Purpose
 
 This project was created as a practice project to improve my web development skills.
 
- Live Demo
+## Live Demo
 
 https://soojh-3df95.web.app
 
